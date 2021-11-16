@@ -76,6 +76,8 @@ namespace Reservas
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Auth}/{action=Login}/{id?}");
+
+
             });
 
            
