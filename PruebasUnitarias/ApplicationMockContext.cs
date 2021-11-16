@@ -92,6 +92,35 @@ namespace PruebasUnitarias
 
             }.AsQueryable();
         }
+
+        public static Mock<ReservasDbContext> getListaPersonalContextMock()
+        {
+            IQueryable<Personal> mesa = getPersonal();
+
+            var mockDbSetPersonal = new Mock<DbSet<Personal>>();
+            mockDbSetPersonal.As<IQueryable<Personal>>().Setup(m => m.Provider).Returns(mesa.Provider);
+            mockDbSetPersonal.As<IQueryable<Personal>>().Setup(m => m.Expression).Returns(mesa.Expression);
+            mockDbSetPersonal.As<IQueryable<Personal>>().Setup(m => m.ElementType).Returns(mesa.ElementType);
+            mockDbSetPersonal.As<IQueryable<Personal>>().Setup(m => m.GetEnumerator()).Returns(mesa.GetEnumerator());
+            mockDbSetPersonal.Setup(m => m.AsQueryable()).Returns(mesa);
+
+
+            var mockContext = new Mock<ReservasDbContext>(new DbContextOptions<ReservasDbContext>());
+            mockContext.Setup(c => c.Personal).Returns(mockDbSetPersonal.Object);
+
+            return mockContext;
+        }
+
+        private static IQueryable<Personal> getPersonal()
+        {
+            return new List<Personal>
+            {
+                new Personal() { Id = 1,Nombres = "Personal 1", Rol = "Rol 1",Password = "Password1",Username = "Username 1"},
+                new Personal() { Id = 2,Nombres = "Personal 2", Rol = "Rol 2",Password = "Password2",Username = "Username 2"},
+                new Personal() { Id = 2,Nombres = "Personal 3", Rol = "Rol 3",Password = "Password3",Username = "Username 3"}
+
+            }.AsQueryable();
+        }
     }
 
 }

@@ -13,6 +13,7 @@ namespace Reservas.Models.Map
         public virtual DbSet<Usuario> Usuarios { get; set; }
         public virtual DbSet<Mesa> Mesa { get; set; }
         public virtual DbSet<Reserva> Reserva { get; set; }
+        public virtual DbSet<Personal> Personal { get; set; }
 
         public ReservasDbContext(DbContextOptions<ReservasDbContext> options) : base(options) { }
 
@@ -23,6 +24,7 @@ namespace Reservas.Models.Map
             modelBuilder.ApplyConfiguration(new UsuarioMap());
             modelBuilder.ApplyConfiguration(new MesaMap());
             modelBuilder.ApplyConfiguration(new ReservaMap());
+            modelBuilder.ApplyConfiguration(new PersonalMap());
         }
     }
 }

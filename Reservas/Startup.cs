@@ -47,6 +47,7 @@ namespace Reservas
             services.AddTransient<InterfaceAuth, RepositorioAuth>();
             services.AddTransient<IMesa, MesaService>();
             services.AddTransient<IReserva, ReservaService>();
+            services.AddTransient<IPersonal, PersonaService>();
         }
         
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
